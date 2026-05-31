@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="icon">👤</div>
+
+        <h1>Đăng ký tài khoản</h1>
+        <p>Tạo tài khoản mới để mua sắm</p>
+
+        <form method="POST">
+            <label>Họ và tên</label>
+            <input type="text" name="fullname">
+
+            <label>Tên đăng nhập</label>
+            <input type="text" name="username">
+
+            <label>Email</label>
+            <input type="email" name="email">
+
+            <label>Mật khẩu</label>
+            <input type="password" name="password">
+
+            <label>Xác nhận mật khẩu</label>
+            <input type="password" name="confirm_password">
+
+            <button type="submit">Đăng ký</button>
+        </form>
+
+        <div class="link">
+            Đã có tài khoản?
+            <a href="/login">Đăng nhập</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

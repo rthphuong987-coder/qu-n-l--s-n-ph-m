@@ -1,11 +1,41 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, redirect
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///database.db'
-db=SQLAlchemy(app)
-@app.route("/")
+
+users = []
+
+@app.route('/')
 def home():
-    return "Hello Flask"
+    return redirect('/login')
+
+@app.route('/register', methods=['GET','POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        users.append({
+            'username': username,
+            'password': password
+        })
+
+        return redirect('/login')
+
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        for user in users:
+            if user['username'] == username and user['password'] == password:
+                return "Đăng nhập thành công"
+
+        return "Sai tài khoản hoặc mật khẩu"
+
+    return render_template('login.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

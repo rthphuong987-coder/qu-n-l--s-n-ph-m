@@ -1,0 +1,85 @@
+body{
+    background: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+.container{
+    min-height:100vh;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    padding-right: 100px;
+}
+
+.card{
+    width:500px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(193, 79, 79, 0.1);
+}
+
+.icon{
+    width:80px;
+    height:80px;
+    margin:auto;
+    border-radius:50%;
+    background:#eef3ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:35px;
+}
+
+h1{
+    text-align:center;
+    margin-top:20px;
+}
+
+p{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:25px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.link{
+    text-align:center;
+    margin-top:20px;
+}
