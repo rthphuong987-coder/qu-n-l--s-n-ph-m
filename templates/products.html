@@ -1,0 +1,26 @@
+<form method="GET" action="/products" class="search-box">
+
+    <input type="text" name="keyword" placeholder="Tìm sản phẩm...">
+    <input type="text" name="keyword" placeholder="Tìm sản phẩm">
+    <button type="submit">Tìm</button>
+    <select name="category">
+        <option value="">Tất cả</option>
+        <option value="ao">Áo</option>
+        <option value="giay">Giày</option>
+        <option value="phukien">Phụ kiện</option>
+    </select>
+
+    <button type="submit">Tìm kiếm</button>
+
+</form>
+<div class="product-list">
+
+    {% for p in products %}
+    <div class="product-card">
+        <img src="{{ p[3] }}" alt="">
+        <h3>{{ p[1] }}</h3>
+        <p>{{ p[2] }} đ</p>
+    </div>
+    {% endfor %}
+
+</div>

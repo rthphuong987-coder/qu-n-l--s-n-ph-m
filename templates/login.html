@@ -5,7 +5,7 @@
     <title>Đăng nhập</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
+<body class="auth-page">
 
 <div class="container">
     <div class="card">
@@ -14,10 +14,10 @@
         <h1>Đăng nhập</h1>
         <p>Chào mừng bạn quay trở lại!</p>
 
-        <form method="POST">
+        <form method="POST" action="/login" >
             <label>Tên đăng nhập hoặc Email</label>
+            <input type="text" name="email" placeholder="Email">
             <input type="text" name="username" placeholder="Nhập tên đăng nhập">
-
             <label>Mật khẩu</label>
             <input type="password" name="password" placeholder="Nhập mật khẩu">
 

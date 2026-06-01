@@ -10,3 +10,14 @@ class Product(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100),unique=True)
     price =db.Column(db.Integer)
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    name = db.Column(db.String(200), nullable=False)
+
+    price = db.Column(db.Integer)
+
+    image = db.Column(db.String(300))
+
+    category = db.Column(db.String(100))
+    Quantity = db.Colimn(db.String(9999))

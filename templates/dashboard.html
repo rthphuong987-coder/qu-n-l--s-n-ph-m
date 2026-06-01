@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+<body class="dashboard-page"></body>
+<div class="dashboard">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+        <div>
+            <h1>📊 Tổng quan</h1>
+            <p>Xin chào ! Đây là bảng điều khiển hệ thống.</p>
+        </div>
+
+        <button class="add-btn">
+            ➕ Thêm sản phẩm
+        </button>
+    </div>
+
+    <!-- Thanh tìm kiếm -->
+    <div class="top-search">
+        <input
+            type="text"
+            placeholder="🔍 Tìm sản phẩm nhanh..."
+        >
+    </div>
+
+    <!-- Thống kê -->
+    <div class="cards">
+
+        <div class="card-box">
+            <h2>{{ total_products }}</h2>
+            <p>Tổng Sản Phẩm</p>
+        </div>
+
+        <div class="card-box">
+            <h2>{{ total_category}}</h2>
+            <p>Danh Mục</p>
+        </div>
+        <div class="card-box">
+            <h2>{{ total_price}}</h2>
+            <p>Tổng Giá Trị</p>
+        </div>
+        <div class="card-box">
+            <h2>{{ total_price}}</h2>
+            <p>Tổng Số Lượng</p>
+        </div>
+
+
+    </div>
+
+    <!-- Chào mừng -->
+    <div class="welcome-box">
+        <h2>Chào mừng đến với hệ thống quản lý sản phẩm</h2>
+
+        <p>
+            Tại đây bạn có thể quản lý sản phẩm,
+            tìm kiếm, chỉnh sửa và theo dõi dữ liệu.
+        </p>
+    </div>
+
+    <!-- Bảng sản phẩm -->
+    <div class="table-container">
+
+        <h2>Sản phẩm </h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Danh mục</th>
+                    <th>Giá</th>
+                    <th>Số Lượng</th>
+                </tr>
+            </thead>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
