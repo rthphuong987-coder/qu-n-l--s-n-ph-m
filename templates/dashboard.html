@@ -15,9 +15,32 @@ Dashboard
             <p>Xin chào ! Đây là bảng điều khiển hệ thống.</p>
         </div>
 
-        <button class="add-btn">
+        <button class="add-btn"  onclick="toggleForm()">
             ➕ Thêm sản phẩm
         </button>
+    <div id="addProductForm" style="display:none;">
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <input type="text" name="name" placeholder="Tên sản phẩm">
+
+        <input type="text" name="category" placeholder="Danh mục">
+
+        <input type="number" name="price" placeholder="Giá">
+
+        <input type="number" name="quantity" placeholder="Số lượng">
+
+        <input type="text" name="code" placeholder="mã sản phẩm">
+
+        <input type="file" name="image">
+
+        <button type="submit">
+            Lưu sản phẩm
+        </button>
+
+    </form>
+
+</div>
     </div>
 
     <!-- Thanh tìm kiếm -->
@@ -72,17 +95,64 @@ Dashboard
                 <tr>
                     <th>ID</th>
                     <th>Tên sản phẩm</th>
+                    <th>Hình ảnh</th>
                     <th>Danh mục</th>
                     <th>Giá</th>
                     <th>Số Lượng</th>
                 </tr>
             </thead>
-            </tbody>
+ <tbody>
 
-        </table>
+{% for product in products %}
+<tr>
+
+<td>{{ product[0] }}</td>
+
+<td>{{ product[1] }}</td>
+
+<td>
+    <img
+        src="{{ url_for('static',
+        filename='uploads/' + product[6]) }}"
+        width="60">
+</td>
+
+<td>{{ product[2] }}</td>
+
+<td>{{ product[3] }}</td>
+
+<td>{{ product[4] }}</td>
+ <!-- Nút xóa -->
+    <td>
+        <a href="{{ url_for('delete_product', id=product[0]) }}"
+           onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')"
+           class="delete-btn">
+            🗑️xóa
+        </a>
+    </td>
+</tr>
+
+</tbody>
+{% endfor %}
+    </tbody>
+
+</table>
 
     </div>
 
 </div>
+<script>
+function toggleForm() {
+
+    let form = document.getElementById("addProductForm");
+
+    if(form.style.display === "none"){
+        form.style.display = "block";
+    }else{
+        form.style.display = "none";
+    }
+
+}
+</script>
 
 {% endblock %}

@@ -6,11 +6,6 @@ class User(db.Model):
     email = db.Column(db.String(100),unique=True)
     password =db.Column(db.String(100),unique=True)
 class Product(db.Model):
-
-    id=db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100),unique=True)
-    price =db.Column(db.Integer)
-class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     name = db.Column(db.String(200), nullable=False)
@@ -20,4 +15,4 @@ class Product(db.Model):
     image = db.Column(db.String(300))
 
     category = db.Column(db.String(100))
-    Quantity = db.Colimn(db.String(9999))
+    quantity = db.Column(db.Interger)
