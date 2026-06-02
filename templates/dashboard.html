@@ -37,13 +37,41 @@ Dashboard
         <button type="submit">
             Lưu sản phẩm
         </button>
+    </form>
+    </div>
+<div id="editForm" style="display:none;">
+
+    <h3>Sửa sản phẩm</h3>
+
+    <form method="POST" action="/update_product" enctype="multipart/form-data">
+
+        <input type="hidden" id="edit_id" name="id">
+
+        <input type="text" id="edit_name" name="name">
+
+        <input type="text" id="edit_category" name="category">
+
+        <input type="number" id="edit_price" name="price">
+
+        <input type="number" id="edit_quantity" name="quantity">
+
+        <input type="text" id="edit_code" name="code">
+ 
+        <input type="file" name="image" required>
+
+        <button type="submit">
+            Cập nhật
+        </button>
+
+    </form>
+
+</div>
 
     </form>
 
 </div>
     </div>
 
-    <!-- Thanh tìm kiếm -->
     <div class="top-search">
         <input
             type="text"
@@ -51,7 +79,6 @@ Dashboard
         >
     </div>
 
-    <!-- Thống kê -->
     <div class="cards">
 
         <div class="card-box">
@@ -75,7 +102,6 @@ Dashboard
 
     </div>
 
-    <!-- Chào mừng -->
     <div class="welcome-box">
         <h2>Chào mừng đến với hệ thống quản lý sản phẩm</h2>
 
@@ -85,7 +111,6 @@ Dashboard
         </p>
     </div>
 
-    <!-- Bảng sản phẩm -->
     <div class="table-container">
 
         <h2>Sản phẩm </h2>
@@ -122,7 +147,19 @@ Dashboard
 <td>{{ product[3] }}</td>
 
 <td>{{ product[4] }}</td>
- <!-- Nút xóa -->
+<td>
+    <a href="#"
+       onclick="editProduct(
+       '{{ product[0] }}',
+       '{{ product[1] }}',
+       '{{ product[2] }}',
+       '{{ product[3] }}',
+       '{{ product[4] }}',
+       '{{ product[5] }}'
+       )">
+       ✏️ Sửa
+    </a>
+</td>
     <td>
         <a href="{{ url_for('delete_product', id=product[0]) }}"
            onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')"
@@ -153,6 +190,29 @@ function toggleForm() {
     }
 
 }
+</script>
+<script>
+
+function editProduct(
+    id,
+    name,
+    category,
+    price,
+    quantity,
+    code
+){
+
+    document.getElementById("editForm").style.display = "block";
+
+    document.getElementById("edit_id").value = id;
+    document.getElementById("edit_name").value = name;
+    document.getElementById("edit_category").value = category;
+    document.getElementById("edit_price").value = price;
+    document.getElementById("edit_quantity").value = quantity;
+    document.getElementById("edit_code").value = code;
+
+}
+
 </script>
 
 {% endblock %}

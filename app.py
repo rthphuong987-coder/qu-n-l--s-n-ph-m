@@ -151,35 +151,48 @@ def products():
         keyword=keyword
     )
 
+@app.route("/update_product", methods=["POST"])
+def update_product():
 
-
-@app.route("/edit_product/<int:id>", methods=["GET", "POST"])
-def edit_product(id):
-    product = product.query.get_or_404(id)
-
-    if request.method == "POST":
-        product.name = request.form["name"]
-        product.category = request.form["category"]
-        product.price = float(request.form["price"])
-        product.quantity = int(request.form["quantity"])
-        product.code = request.form["code"]
-
-        image = request.files["image"]
-
-        if image and image.filename != "":
-            filename = secure_filename(image.filename)
-            image.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-            product.image = filename
-
-        db.session.commit()
-
-        flash("Cập nhật sản phẩm thành công!")
-        return redirect(url_for("dashboard"))
-
-    return render_template(
-        "edit_product.html",
-        product=product
+    id = request.form["id"]
+    name = request.form["name"]
+    category = request.form["category"]
+    price = request.form["price"]
+    quantity = request.form["quantity"]
+    image = request.files["image"]
+    filename =secure_filename(image.filename)
+    image.save(
+         os.path.join("static/uploads",filename)
     )
+    code = request.form["code"]
+    conn = sqlite3.connect("products.db")
+    c = conn.cursor()
+
+    c.execute("""
+        UPDATE products
+        SET
+            name=?,
+            category=?,
+            price=?,
+            quantity=?,
+            code=?,
+            image=?
+        WHERE id=?
+    """,
+    (
+        name,
+        category,
+        price,
+        quantity,
+        code,
+        filename,
+        id
+    ))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/dashboard")
 
 @app.route("/delete_product/<int:id>")
 def delete_product(id):

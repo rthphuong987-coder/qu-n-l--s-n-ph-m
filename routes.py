@@ -78,7 +78,6 @@ def edit_product(id):
 
         return redirect("/dashboard")
 
-    # lấy dữ liệu cũ
     c.execute("SELECT * FROM products WHERE id=?", (id,))
     product = c.fetchone()
 
