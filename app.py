@@ -90,10 +90,20 @@ def login():
       return render_template("login.html")
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-
+    
     conn = sqlite3.connect("products.db")
     c = conn.cursor()
+    keyword = request.args.get("keyword", "")
+    category = request.args.get("category", "")
 
+    c.execute("SELECT COUNT(DISTINCT category) FROM products")
+    total_category = c.fetchone()[0]
+
+    c.execute("SELECT SUM(price * quantity) FROM products")
+    total_price = c.fetchone()[0] or 0
+
+    c.execute("SELECT SUM(quantity) FROM products")
+    total_quantity = c.fetchone()[0] or 0
     if request.method == 'POST':
 
         name = request.form['name']
@@ -129,19 +139,37 @@ def dashboard():
         ))
 
         conn.commit()
+        return redirect("/dashboard")
 
-    c.execute("SELECT * FROM products")
-    products = c.fetchall()
+    sql = "SELECT * FROM products WHERE 1=1"
+    params = []
 
+    if keyword:
+       sql += " AND name LIKE ?"
+       params.append(f"%{keyword}%")
+
+    if category:
+       sql += " AND category = ?"
+       params.append(category)
+
+    c.execute(sql, params)
+    products = c.fetchall() 
+
+    total_products = len(products)
+    c.execute("SELECT DISTINCT category FROM products")
+    categories = c.fetchall()
     conn.close()
 
     return render_template(
-        'dashboard.html',
-        products=products,
-        total_products=len(products),
-        total_category=0,
-        total_price=0
-    )
+    'dashboard.html',
+    products=products,
+    categories=categories,
+    keyword=keyword,
+    total_products=total_products,
+    total_category=total_category,
+    total_price=total_price,
+    total_quantity=total_quantity
+)
 @app.route("/products")
 def products():
     keyword = request.args.get("keyword", "")

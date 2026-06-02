@@ -26,7 +26,7 @@ Dashboard
 
         <input type="text" name="category" placeholder="Danh mục">
 
-        <input type="number" name="price" placeholder="Giá">
+        <input type="number" name="price" placeholder="Giá" step="any">
 
         <input type="number" name="quantity" placeholder="Số lượng">
 
@@ -51,7 +51,7 @@ Dashboard
 
         <input type="text" id="edit_category" name="category">
 
-        <input type="number" id="edit_price" name="price">
+        <input type="number" id="edit_price" name="price" step="any">
 
         <input type="number" id="edit_quantity" name="quantity">
 
@@ -73,12 +73,44 @@ Dashboard
     </div>
 
     <div class="top-search">
+
+    <form method="GET" action="/dashboard">
+
         <input
             type="text"
-            placeholder="🔍 Tìm sản phẩm nhanh..."
+            name="keyword"
+            placeholder="🔍 Tìm sản phẩm..."
+            value="{{ keyword }}"
         >
-    </div>
 
+        <button type="submit">
+            Tìm
+        </button>
+
+    </form>
+
+</div>
+<form method="GET" action="/dashboard">
+
+    <select name="category">
+
+        <option value="">
+            Tất cả danh mục
+        </option>
+
+        {% for c in categories %}
+        <option value="{{ c[0] }}">
+            {{ c[0] }}
+        </option>
+        {% endfor %}
+
+    </select>
+
+    <button type="submit">
+        Lọc
+    </button>
+
+</form>
     <div class="cards">
 
         <div class="card-box">
@@ -88,15 +120,15 @@ Dashboard
 
         <div class="card-box">
             <h2>{{ total_category}}</h2>
-            <p>Danh Mục</p>
+            <p> Tổng Danh Mục</p>
+        </div>
+        <div class="card-box">
+            <h2>{{ total_quantity}}</h2>
+            <p>Tổng Số lượng</p>
         </div>
         <div class="card-box">
             <h2>{{ total_price}}</h2>
             <p>Tổng Giá Trị</p>
-        </div>
-        <div class="card-box">
-            <h2>{{ total_price}}</h2>
-            <p>Tổng Số Lượng</p>
         </div>
 
 
