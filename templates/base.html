@@ -12,9 +12,13 @@
 <div class="sidebar">
 
     <h2>📦 ShopManager</h2>
-
+     <div class="user-info">
+         {{ session['username'] }}
+     </div>
     <a class="menu-item logout" href="/login">
-        Đăng xuất
+        <button class="logout-btn">
+         Đăng xuất
+        </button>
     </a>
 </div>
 

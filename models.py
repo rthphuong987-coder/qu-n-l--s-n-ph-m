@@ -15,4 +15,5 @@ class Product(db.Model):
     image = db.Column(db.String(300))
 
     category = db.Column(db.String(100))
+    
     quantity = db.Column(db.Interger)

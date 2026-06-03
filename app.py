@@ -1,8 +1,9 @@
 import sqlite3
 from werkzeug.utils import secure_filename
-from flask import Flask, render_template, request, redirect,flash,url_for
+from flask import Flask, render_template, request, redirect,flash,url_for,session
 import os
 app = Flask(__name__)
+app.secret_key="1234567"
 def init_db():
     conn = sqlite3.connect("users.db")
     c = conn.cursor()
@@ -83,7 +84,8 @@ def login():
          c.execute("SELECT * FROM users WHERE email=? AND password=?", (email, password))
         user = c.fetchone()
         if user:
-            return redirect("/dashboard")
+          session["username"] = username
+          return redirect("/dashboard")
         else:
             return "Sai email hoặc mật khẩu"
 
@@ -146,7 +148,7 @@ def dashboard():
 
     if keyword:
        sql += " AND name LIKE ?"
-       params.append(f"%{keyword}%")
+       params.append(f"{keyword}")
 
     if category:
        sql += " AND category = ?"
@@ -187,14 +189,30 @@ def update_product():
     category = request.form["category"]
     price = request.form["price"]
     quantity = request.form["quantity"]
-    image = request.files["image"]
-    filename =secure_filename(image.filename)
-    image.save(
-         os.path.join("static/uploads",filename)
-    )
     code = request.form["code"]
+
     conn = sqlite3.connect("products.db")
     c = conn.cursor()
+
+    c.execute(
+        "SELECT image FROM products WHERE id=?",
+        (id,)
+    )
+
+    old_image = c.fetchone()[0]
+
+    image = request.files["image"]
+
+    if image and image.filename != "":
+
+        filename = secure_filename(image.filename)
+
+        image.save(
+            os.path.join("static/uploads", filename)
+        )
+
+    else:
+        filename = old_image
 
     c.execute("""
         UPDATE products

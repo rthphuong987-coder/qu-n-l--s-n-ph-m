@@ -1,4 +1,4 @@
-from flask import Flask, render_template,redirect,request,url_for,flash
+from flask import Flask, render_template,redirect,request,url_for,flash,session
 from models import db,Product
 import sqlite3
 from werkzeug.utils import secure_filename
