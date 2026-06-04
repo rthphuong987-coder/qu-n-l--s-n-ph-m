@@ -10,7 +10,7 @@ class Product(db.Model):
 
     name = db.Column(db.String(200), nullable=False)
 
-    price = db.Column(db.Integer)
+    price = db.Column(db.Interger)
 
     image = db.Column(db.String(300))
 
