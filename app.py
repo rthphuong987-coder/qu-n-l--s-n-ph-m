@@ -148,7 +148,7 @@ def dashboard():
 
     if keyword:
        sql += " AND name LIKE ?"
-       params.append(f"{keyword}")
+       params.append(f"%{keyword}%")
 
     if category:
        sql += " AND category = ?"
