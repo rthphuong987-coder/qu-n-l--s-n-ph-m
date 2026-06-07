@@ -85,6 +85,7 @@ def login():
         user = c.fetchone()
         if user:
           session["username"] = username
+          session["user_id"] = user[0]
           return redirect("/dashboard")
         else:
             return "Sai email hoặc mật khẩu"
